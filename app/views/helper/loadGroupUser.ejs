@@ -1,0 +1,19 @@
+<% 
+loadGroupUser =(groupList,id)=>{
+    let i=0;
+    let xhtml='<option value="">Choose Group</option>';
+    for (i=0;i<groupList.length;i++)
+    {
+        if(groupList[i].id===id)
+        {
+        xhtml+=`<option value="${groupList[i].id}" selected="selected" >${groupList[i].name} </option>`;
+        }
+        else
+        {
+            xhtml+=`<option value="${groupList[i].id}"  >${groupList[i].name} </option>`;
+        }
+    }
+    return xhtml;
+
+}
+%>

@@ -1,0 +1,22 @@
+<% 
+    loadStatus=(status)=>{
+        let xhtml='';
+        if (status===''){
+            xhtml= `<option value="">Choose Status</option>
+                                    <option value="active"  >Active</option>
+                                    <option value="inactive"  >Inactive</option>`
+        }
+        else
+        {
+            if (status==='active') xhtml=`<option value="">Choose Status</option>
+                                    <option value="active" selected="selected" >Active</option>
+                                    <option value="inactive"  >Inactive</option>`;
+            else xhtml=`<option value="">Choose Status</option>
+                                    <option value="active"  >Active</option>
+                                    <option value="inactive" selected="selected" >Inactive</option>`;
+        }
+        return xhtml;
+
+    }
+
+%>

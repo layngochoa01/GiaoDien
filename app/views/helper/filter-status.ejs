@@ -1,0 +1,18 @@
+
+<% 
+filterStatusHelper = (statusFillter,keywork,collection) => { 
+    let xhtml = '';
+    statusFillter.forEach((statusFillter)=>{
+        let link  =`/${systemConfig.prefixAdmin}/${collection}/status/${statusFillter.value}`
+        if(keywork !== ''){
+            link += `?keywork=${keywork}`
+        }
+        xhtml += `
+        <a class="btn m-b-sm btn-${statusFillter.class} btn-sm" href="${link}">
+            ${statusFillter.name.toUpperCase() + "(" + statusFillter.count + ")" }
+        </a>`
+   })
+   return xhtml;
+}
+    
+%>

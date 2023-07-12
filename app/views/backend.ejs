@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ./elements/header.ejs %>
+    </head>
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                
+                <% include ./elements/navbar.ejs %>
+            </nav>
+            <div id="page-wrapper">
+                <% include ./elements/pageTitle.ejs %>
+                <%- body %>
+            </div>
+        </div>
+        <% include ./elements/script.ejs %>
+    </body>
+</html>

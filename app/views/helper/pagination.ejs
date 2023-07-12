@@ -1,0 +1,139 @@
+
+<% 
+paginationHelper = (pagination,currentStatus,keywork) => { 
+    const totalItems = pagination.totalItems;
+    const totalItemsPage = pagination.totalItemsPage;
+    const totalPage = Math.ceil(totalItems/totalItemsPage);
+    const currentPage = pagination.currentPage;
+    const pagerange = pagination.pagerange;
+     let from=0,to=0;
+     let totalItemsPage2=0;
+     // Tìm thông số From và To cho từng trang
+     if (currentPage===1) {
+            if(totalItems===0)
+            {
+                from=0;
+                to=0;
+            }
+            else
+            {
+                from = 1;
+                if (totalItems < totalItemsPage)
+                {
+                    to= totalItems;
+                }
+                else
+                {
+                    to = 1 * totalItemsPage;
+                }
+            }    
+        }
+     else if (currentPage!==0) {
+        from= (currentPage-1)* totalItemsPage+1;
+        to = from +(totalItemsPage-1);
+        while (to > totalItems){to--} ;
+    }
+    // Xử lý tìm số Min Max cho phân trang
+    let min=0,max=0;
+    let number = Math.ceil(pagerange/2);
+    let number2=totalPage-number+1;
+    if (currentPage<=number)
+    {
+        min=1;max=pagerange;
+    }
+    if ((currentPage>number)&&(currentPage<number2))
+    {
+        min= currentPage - pagerange +number;max= min+pagerange-1;
+    }
+    if(currentPage>=number2)
+    {
+        max=totalPage; min= max - pagerange+1;
+    }
+  
+    // Tạo các nút nhấn để chuyển trang, chặn đầu trang và cuối trang
+    let link='';
+    let htmlStart='';
+    let htmlPrev='';
+    let htmlNext ='';
+    let htmlEnd ='';
+    let htmlbutton=``;
+    
+    if(totalPage>1)
+    {
+        link =`${systemConfig.prefixAdmin}/items/status/${currentStatus}?keywork=${keywork}`;
+        htmlStart=`<li class="disabled"><a>Start</a></li>`;
+        htmlPrev=`<li class="disabled"><a>Prev</a></li>`;
+        htmlNext =`<li class="disabled"><a>Next</a></li>`;
+        htmlEnd =`<li class="disabled"><a>End</a></li>`;
+        if(currentPage>1)
+        {
+            htmlStart=`<li><a href="${link}&page=1">Start</a></li>`;
+            htmlPrev=`<li><a href="${link}&page=${currentPage-1}">Prev</a></li>`
+        }
+        if(currentPage<totalPage)
+        {
+            htmlNext=`<li><a href="${link}&page=${currentPage+1}">Next</a></li>`;
+            htmlEnd =`<li><a href="${link}&page=${totalPage}">End</a></li>`;
+        }   
+
+        let i=1;
+        for (i=min;i<=max;i++)
+        {
+            if (i===currentPage)
+            {
+                htmlbutton +=`<li class="active"><a>${i}</a></li>`
+            }
+            else htmlbutton +=`<li><a href="${link}&page=${i}">${i}</a></li>`;
+        }
+    }
+
+    // Xử lý đếm số phần tử trên trang Khi Search
+    if (totalItems < totalItemsPage )
+     {
+        totalItemsPage2= totalItems;
+     }
+     else if (currentPage<max)
+        {
+            totalItemsPage2=totalItemsPage;
+        }
+        else
+        {
+            totalItemsPage2= totalItems-((max-1)*totalItemsPage);
+        }
+
+
+   return `
+   <div class="panel panel-info" id="pagination">
+    <div class="panel-heading">
+        Pagination
+        <span>^</span>
+        <span class="label label-warning">Total pages: ${totalPage}</span>
+        <span class="label label-danger">Total entries: ${totalItems}</span>
+    </div>
+    <div class="panel-body">
+        <div class="infor-pagination">
+            <p>Number of elements on the page: <span>${totalItemsPage2}</span></p>
+            <p>Showing <span> ${from} </span> to <span>${to}</span> of <span>${totalItems}</span> entries</p>
+        </div>
+        <div class="ad-pagination">
+            <ul class="pagination text-center">
+               ${htmlStart}
+               ${htmlPrev}
+               ${htmlbutton}
+               ${htmlNext}
+               ${htmlEnd}
+            </ul>
+        </div>
+    </div>
+</div>
+   `;
+}
+    
+%>
+<!-- <li class="disabled"><a>«</a></li>
+<li><a href="admin123/item/page=1">1</a></li>
+<li class="active"><a>2</a></li>
+<li><a href="admin123/item/page=3">3</a></li>
+<li><a href="admin123/item/page=4">4</a></li>
+<li><a href="admin123/item/page=5">5</a></li>
+<li><a href="admin123/item/page=0">»</a></li> -->

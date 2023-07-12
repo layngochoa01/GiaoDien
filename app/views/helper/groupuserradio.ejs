@@ -1,0 +1,36 @@
+<% 
+    groupRadiohelper=(value)=>{
+        let xhtml='';
+        if (value=='yes')
+        {
+            xhtml=` <br>
+                    <input type="radio" name="group_acp" value="yes" checked="true" >
+                    <label>Yes</label>
+                    <br>
+                    <input type="radio" name="group_acp" value="no" >
+                    <label>No</label>`;
+        }
+        else if (value=='no')
+        {
+            xhtml=`<br>
+                <input type="radio" name="group_acp" value="yes" >
+                <label>Yes</label>
+                <br><input type="radio" name="group_acp" value="no" checked="true" >
+                <label>No</label>`;
+        }
+        else 
+        xhtml=`<br>
+        <input type="radio" name="group_acp" value="yes" >
+        <label>Yes</label>
+        <br>
+        <input type="radio" name="group_acp" value="no" >
+        <label>No</label>`;
+
+        return xhtml;
+    }
+
+
+                                    
+
+
+%>

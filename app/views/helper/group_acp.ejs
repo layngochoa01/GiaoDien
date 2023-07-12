@@ -1,0 +1,12 @@
+<% 
+groupAcp=(group_acp,id,linkPrefix)=>{
+    let xhtml='';   
+    let link=`${linkPrefix}/change-groupacp/${id}/${group_acp}`;
+    let iconcheck = (group_acp==='yes')? '-check' :'';
+
+    xhtml=`<td><a href="${link}"><i class="fa fa${iconcheck}-square-o" aria-hidden="true"></i></a> </td>`;
+    return xhtml;
+}
+%>
+
+

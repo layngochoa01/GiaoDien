@@ -1,0 +1,30 @@
+<% 
+showError =(error)=>{
+    let xhtml='';
+    let errorhtml='';
+    if(error!=='')
+    {
+        if (error.length>0)
+        {
+            let i;
+            for(i=0;i<error.length;i++)
+            {
+                let name= error[i].path.charAt(0).toUpperCase() + error[i].path.slice(1);
+                errorhtml+=`    <div class="alert alert-danger" role="alert">
+                                    <ul>
+                                        <li><b>${name}</b> : ${error[i].msg}</li>
+                                    </ul>
+                                </div> `;
+            }
+            xhtml=`<div class="row">       
+                        <div class="col-lg-6">
+                            ${errorhtml}   
+                        </div>      
+            </div> `;
+        }
+    }
+
+    return xhtml;
+}
+
+%>

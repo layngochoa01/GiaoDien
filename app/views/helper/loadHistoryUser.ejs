@@ -1,0 +1,22 @@
+<% 
+loadHistoryUser =(item)=>{
+    let xhtml='';
+    let usernameCreate='';
+    let usernameModify='';
+    if (item.created.user_name) usernameCreate=item.created.user_name;
+    if (item.modified.user_name) usernameModify=item.modified.user_name;
+        xhtml=`<td>
+                    <span class="glyphicon glyphicon-user">${usernameCreate}</span> <br>
+                    <span class="glyphicon glyphicon-time">${moment(item.createdAt).format(systemConfig.format_date)}</span><br>
+                </td>
+                <td>
+                    <span class="glyphicon glyphicon-user">${usernameModify}</span> <br>
+                    <span class="glyphicon glyphicon-time">${moment(item.updatedAt).format(systemConfig.format_date)}</span><br>
+                </td>`
+
+    return xhtml;
+}
+
+
+
+%>

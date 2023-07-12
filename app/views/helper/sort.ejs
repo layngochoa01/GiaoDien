@@ -1,0 +1,31 @@
+<% 
+sortHelper=(collection,sortby,sorttype,sortname)=>{
+    let xhtml='';
+    let columnName='';
+    let sort_by='';
+    let sort_type='';
+    if (sortname==='name') columnName='Name';
+    if (sortname==='ordering') columnName='Ordering'
+    else {columnName=sortname}
+    if (sortname!==sortby)
+    {
+        sort_by=sortname;
+        sort_type='asc'
+    }
+    else {
+        if(sorttype==='asc') sort_type='desc';
+        else sort_type='asc';
+        sort_by=sortname;
+    }
+
+    xhtml=`<th style="text-align:left;">
+                                        <a href="${systemConfig.prefixAdmin}/${collection}/sort/${sort_by}/${sort_type}" class="title_col"> ${columnName} <i class="fa fa-fw fa-sort-${sort_type}"></i></a>
+                                    </th>`
+    return xhtml;
+}
+
+
+
+
+
+%>
